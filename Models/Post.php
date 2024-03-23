@@ -19,14 +19,14 @@ class Post implements Model {
 
     ) {}
 
-    public function getPost_id(): ?int {
+    public function getPost_id(): ?string {
         return $this->post_id;
     }
 
-    public function setPost_id(int $post_id): void {
+    public function setPost_id(string $post_id): void {
         $this->post_id = $post_id;
     }
-    public function getReply_to_id(): string {
+    public function getReply_to_id(): ?string {
         return $this->reply_to_id;
     }
 

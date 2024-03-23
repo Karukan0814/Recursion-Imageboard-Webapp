@@ -5,7 +5,7 @@ namespace Database\DataAccess\Interfaces;
 use Models\Post;
 
 interface PostDAO {
-    public function create(Post $postData): bool;
+    public function create(Post $postData): ?Post;
     public function getById(string $post_id): ?Post;
     public function update(Post $postData): bool;
     public function delete(string $post_id): bool;

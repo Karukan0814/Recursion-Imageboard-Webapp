@@ -1,6 +1,5 @@
 <?php
-namespace Types;
-
+namespace Helpers;
 enum ValueType: string
 {
     case STRING = 'string';

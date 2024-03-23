@@ -8,8 +8,9 @@ use Response\Render\JSONRenderer;
 
 use Database\DataAccess\Implementations\ComputerPartDAOImpl;
 use Database\DataAccess\Implementations\PostDAOImpl;
+use Helpers\ValueType;
 use Models\ComputerPart;
-use Types\ValueType;
+use Models\Post;
 
 return [
     'random/part' => function (): HTTPRenderer {
@@ -168,15 +169,102 @@ return [
 
             ];
             $validatedData = ValidationHelper::validateFields($required_fields, $_POST);
+            print_r(isset($_FILES['image']));
+            // 画像の存在チェック
+            if (!isset($_FILES['image'])) {
 
-            // 画像の添付がある場合は保存する
-            if (isset($_FILES['image'])) {
+                throw new Exception('image should be attached!');
+            }
 
-                
+            $postDao = new PostDAOImpl();
+
+            // 新しい投稿のデータを準備する
+
+
+            // post_idを生成
+            $post_id = bin2hex(random_bytes(16)); // 32文字のランダムな文字列を生成
+            $subject = $_POST['subject'];
+            $text = $_POST['text'];
+
+
+            $newPost = new Post($post_id, null, $subject, $text);
+            //スレッドを登録する
+            $createResult = $postDao->create($newPost);
+            if (!$createResult) {
+
+                throw new Exception('somethin wrong with registering the thread data!');
             }
 
 
-            $postDao = new PostDAOImpl();
+
+
+            // 画像を保存する
+
+            $file = $_FILES['image'];
+            $fileTypeRes = ValidationHelper::validateFileType($file['type'] ?? null);
+            $fileSizeRes = ValidationHelper::validateFileSize($file['size']);
+
+            $fileTmpName = $file['tmp_name'];
+
+            print_r($fileTmpName);
+
+            if (count($fileTypeRes["error"]) > 0 || count($fileSizeRes["error"]) > 0) {
+                $allErrors = array_merge($fileTypeRes["error"], $fileSizeRes["error"]);
+                //全てのエラーを初期ページに引き渡す
+
+                //TODO 最新スレッドも検索して返す
+                return new HTMLRenderer('threads', ['errors' => $allErrors]);
+            }
+
+            //public/img/originalに画像を保存する
+            // ファイルの保存処理
+            $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . "/img/original"; // プロジェクトのルートディレクトリに対する相対パス
+
+            //  テーブルに登録された時間を取得
+            $create_datetime = $createResult->getCreated_at();
+
+            // ファイル名をハッシュ化する
+            $hashedFileName = hash('sha256', $post_id . $create_datetime);
+
+            // ファイルの拡張子を取得
+            $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+            // ハッシュ化されたファイル名と拡張子を組み合わせてアップロードパスを作成
+            $uploadPath = $uploadDirectory . "/" . $hashedFileName . '.' . $fileExtension;
+            // ファイルを保存する
+            if (!move_uploaded_file($fileTmpName, $uploadPath)) {
+                $allErrors[] = "registering img failed";
+                //全てのエラーを初期ページに引き渡す
+
+                //TODO 最新スレッドも検索して返す
+                return new HTMLRenderer('threads', ['errors' => $allErrors]);
+            }
+
+
+            // サムネイル画像も作成して保存する
+            // ハッシュ化されたファイル名と拡張子を組み合わせてアップロードパスを作成
+            $uploadPath = $uploadDirectory . "/" . $hashedFileName . '.' . $fileExtension;
+
+
+            // 入力ファイル名と出力ファイル名
+            $inputFile = $uploadPath;
+            $outputFile = $_SERVER['DOCUMENT_ROOT'] . "/img/thumbnail" . "/" . $hashedFileName . '.' . $fileExtension;
+
+            // Imagemagickのコマンド
+            $command = "convert " . escapeshellarg($inputFile) . " -resize 150x150 " . escapeshellarg($outputFile);
+
+            // コマンドを実行
+            exec($command, $output, $return_code);
+
+            // 実行結果をチェック
+            if ($return_code === 0) {
+                echo "変換成功: " . $outputFile;
+            } else {
+                echo "変換失敗";
+            }
+
+
+
 
             //スレッドを登録する
             $threads = $postDao->getAllThreads(0, 5); //親スレッドの最新５件を取得

@@ -9,10 +9,11 @@ use Models\Post;
 
 class PostDAOImpl implements PostDAO
 {
-    public function create(Post $postData): bool
-    {
-        if ($postData->getPost_id() !== null) throw new \Exception('Cannot create a post with an existing ID. id: ' . $postData->getPost_id());
-        return $this->createOrUpdate($postData);
+    public function create(Post $postData) :?Post {
+        // if ($postData->getPost_id() !== null) throw new \Exception('Cannot create a post with an existing ID. id: ' . $postData->getPost_id());
+        $this->createOrUpdate($postData);
+       $result= $this->getById($postData->getPost_id());
+        return $result;
     }
 
     public function getById(string $post_id): ?Post

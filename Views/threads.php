@@ -16,7 +16,8 @@ print_r($replies);
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <form id="threadForm" action="register" method="post" class="d-flex flex-column align-items-left">
+            <form id="upload-form" action="register" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-left">
+
                 <div class="mb-3 w-50">
                     <label for="subject" class="form-label">Subject:</label>
                     <input type="text" class="form-control" id="subject" name="subject" maxlength="100">
@@ -33,6 +34,8 @@ print_r($replies);
                     <button type="submit" class="btn btn-primary">Register</button>
                 </div>
             </form>
+            <div id="preview" class="mt-2"></div>
+
         </div>
 
         <div class="col mt-3">
@@ -62,3 +65,40 @@ print_r($replies);
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('image-input').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('preview');
+                preview.innerHTML = '<img src="' + e.target.result + '" alt="Image preview">';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('upload-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // まずフォームの送信を停止
+
+        const fileInput = document.getElementById('image-input');
+        const file = fileInput.files[0];
+
+        // ファイルがアップロードされているか確認
+        if (!file) {
+            alert('ファイルが選択されていません。');
+            return;
+        }
+
+        // ファイルの形式を確認
+        const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!validImageTypes.includes(file.type)) {
+            alert('JPEG、PNG、またはGIF形式の画像を選択してください。');
+            return;
+        }
+
+        // すべてのチェックが通った場合、フォームを送信
+        this.submit();
+    });
+</script>

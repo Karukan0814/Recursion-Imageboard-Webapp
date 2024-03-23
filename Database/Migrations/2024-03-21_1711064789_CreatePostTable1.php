@@ -10,7 +10,7 @@ class CreatePostTable1 implements SchemaMigration
     {
         // マイグレーションロジックをここに追加してください
         return ["CREATE TABLE IF NOT EXISTS posts (
-            post_id VARCHAR(500) PRIMARY KEY,
+            post_id VARCHAR(32) PRIMARY KEY,
             reply_to_id VARCHAR(500) ,
             subject VARCHAR(100) ,
             text VARCHAR(500),
