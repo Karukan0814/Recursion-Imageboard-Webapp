@@ -9,6 +9,21 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|html)$/', $_SERVER["REQUEST_URI"])
     return false;
 }
 
+
+// // パスが img フォルダを指している場合、画像ファイルを出力して終了
+// if (preg_match('#^img/([^/]+)$#', $path, $matches)) {
+//     if (file_exists($path)) {
+//         $contentType = mime_content_type($path);
+//         header("Content-Type: $contentType");
+//         readfile($path);
+//     } else {
+//         http_response_code(404);
+//         echo "404 Not Found: The requested image was not found on this server.";
+//     }
+//     exit;
+// }
+
+
 // ルートを読み込みます
 $routes = include('Routing/routes.php');
 

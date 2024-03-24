@@ -31,6 +31,11 @@ class PostSeeder extends AbstractSeeder
             'data_type' => 'string',
             'column_name' => 'text'
         ]
+        ,
+        [
+            'data_type' => 'string',
+            'column_name' => 'file_name'
+        ]
     ];
 
     public function createRowData(): array
@@ -47,6 +52,7 @@ class PostSeeder extends AbstractSeeder
                 ,
                 $faker->text(20),
                 $faker->text(200),
+                "test.png"
 
             ];
 

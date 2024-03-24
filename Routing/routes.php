@@ -238,7 +238,6 @@ return [
                 $hashedFileName = hash('sha256', $post_id . $create_datetime);
 
                 // ファイルの拡張子を取得
-
                 $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
 
                 // ハッシュ化されたファイル名と拡張子を組み合わせてアップロードパスを作成

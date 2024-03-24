@@ -14,6 +14,8 @@ class CreatePostTable1 implements SchemaMigration
             reply_to_id VARCHAR(500) ,
             subject VARCHAR(100) ,
             text VARCHAR(500),
+            file_name VARCHAR(500),
+
             created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
             updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  , 
             FOREIGN KEY (reply_to_id) REFERENCES posts(post_id) 

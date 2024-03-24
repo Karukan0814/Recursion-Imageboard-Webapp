@@ -14,6 +14,8 @@ class Post implements Model {
         private ?string $reply_to_id = null,
         private string $subject,
         private string $text,
+        private ?string $file_name = null,
+
         private ?string $created_at = null,
         private ?string $updated_at = null
 
@@ -47,6 +49,14 @@ class Post implements Model {
 
     public function setText(string $text): void {
         $this->text = $text;
+    }
+
+    public function getFileName(): string {
+        return $this->file_name;
+    }
+
+    public function setFileName(string $file_name): void {
+        $this->file_name = $file_name;
     }
 
     public function getCreated_at(): ?string {

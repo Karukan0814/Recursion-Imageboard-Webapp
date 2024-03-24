@@ -108,22 +108,26 @@ class PostDAOImpl implements PostDAO
     
         $query =
             <<<SQL
-            INSERT INTO posts (post_id, reply_to_id, subject, text)
+            INSERT INTO posts (post_id, reply_to_id, subject, text,file_name)
             VALUES (?, ?, ?, ?)
             ON DUPLICATE KEY UPDATE
                 reply_to_id = VALUES(reply_to_id),
                 subject = VALUES(subject),
-                text = VALUES(text);
+                text = VALUES(text),
+                file_name=VALUES(file_name);
+
         SQL;
     
         $result = $mysqli->prepareAndExecute(
             $query,
-            'ssss',
+            'sssss',
             [
                 $postData->getPost_id(),
                 $postData->getReply_to_id(),
                 $postData->getSubject(),
-                $postData->getText()
+                $postData->getText(),
+                $postData->getFileName()
+
             ]
         );
     
@@ -147,6 +151,7 @@ class PostDAOImpl implements PostDAO
         reply_to_id: $data['reply_to_id'],
         subject: $data['subject'],
         text: $data['text'],
+        file_name: $data['file_name'],
         created_at: $data['created_at'],
         updated_at: $data['updated_at']
 

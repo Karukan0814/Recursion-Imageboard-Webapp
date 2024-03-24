@@ -1,15 +1,12 @@
 <?php
-// print_r($threads);
-print_r($errors);
-
 
 ?>
 <div class="container">
     <div class="row">
         <div>
-        <h2 style="color: #4a90e2; font-size: 24px; font-weight: bold;">Post new thread</h2>
+            <h2 style="color: #4a90e2; font-size: 24px; font-weight: bold;">Post new thread</h2>
 
-        <hr style="background-color: #4a90e2;">
+            <hr style="background-color: #4a90e2;">
             <?php if (!empty($errors)) : ?>
                 <?php foreach ($errors as $error) : ?>
                     <div class="alert alert-info"><?= htmlspecialchars($error); ?></div>
@@ -41,29 +38,34 @@ print_r($errors);
         <div class="col mt-3">
 
 
-    
-    <h2 style="color: #4a90e2; font-size: 24px; font-weight: bold;">Threads</h2>
 
-</div>
+            <h2 style="color: #4a90e2; font-size: 24px; font-weight: bold;">Threads</h2>
 
-            <?php if (empty($threads)) : ?>
-                <div class="alert alert-info">スレッドは登録されていません。</div>
-            <?php else : ?>
-                <ul class="list-group">
-                    <?php foreach ($threads as $thread) : ?>
-                        <li class="list-group-item">
-                            <a href="/post?id=<?= htmlspecialchars($thread->getPost_id()) ?>" class="text-decoration-none text-secondary">
-                                <h5><?= htmlspecialchars($thread->getSubject()) ?></h5>
-                                <p> <?= htmlspecialchars($thread->getText()) ?></p><br>
-                                <small> <?= htmlspecialchars($thread->getCreated_at()) ?></small><br>
-
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
         </div>
+
+        <?php if (empty($threads)) : ?>
+            <div class="alert alert-info">スレッドは登録されていません。</div>
+        <?php else : ?>
+            <ul class="list-group">
+                <?php foreach ($threads as $thread) : ?>
+                 
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="/post?id=<?= htmlspecialchars($thread->getPost_id()) ?>" class="text-decoration-none text-secondary">
+                            <h5><?= htmlspecialchars($thread->getSubject()) ?></h5>
+                            <p> <?= htmlspecialchars($thread->getText()) ?></p>
+                            <small> <?= htmlspecialchars($thread->getCreated_at()) ?></small>
+                        </a>
+
+                        <?php if (!empty($thread->getFileName())) : ?>
+                            <img src="<?= '/img/thumbnail/' .$thread->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail" >
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+
     </div>
+</div>
 </div>
 
 <script>
