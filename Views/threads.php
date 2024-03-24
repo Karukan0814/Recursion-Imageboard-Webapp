@@ -1,6 +1,6 @@
 <?php
 // print_r($threads);
-print_r($replies);
+print_r($errors);
 
 
 ?>
@@ -16,7 +16,7 @@ print_r($replies);
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <form id="upload-form" action="register" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-left">
+            <form id="upload-form" action="" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-left">
 
                 <div class="mb-3 w-50">
                     <label for="subject" class="form-label">Subject:</label>

@@ -73,7 +73,7 @@ class ValidationHelper
 
         // $text が string 型であることを確認
         if (!is_string($text)) {
-            $response["error"][] = "Title / Text: The provided value is not a valid string.";
+            $response["error"][] = "Subject / Text: The provided value is not a valid string.";
             return $response;
         }
 
