@@ -109,7 +109,7 @@ class PostDAOImpl implements PostDAO
         $query =
             <<<SQL
             INSERT INTO posts (post_id, reply_to_id, subject, text,file_name)
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, ?,?)
             ON DUPLICATE KEY UPDATE
                 reply_to_id = VALUES(reply_to_id),
                 subject = VALUES(subject),

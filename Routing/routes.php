@@ -237,11 +237,25 @@ return [
                 // ファイル名をハッシュ化する
                 $hashedFileName = hash('sha256', $post_id . $create_datetime);
 
+              
+
+
                 // ファイルの拡張子を取得
                 $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
 
                 // ハッシュ化されたファイル名と拡張子を組み合わせてアップロードパスを作成
                 $uploadPath = $uploadDirectory . "/" . $hashedFileName . '.' . $fileExtension;
+
+
+                  //ファイル名を登録する
+                  $newPost->setFileName($hashedFileName . '.' . $fileExtension);
+                  $updateResult = $postDao->update($newPost);
+                  if (!$updateResult) {
+  
+                      throw new Exception('something wrong with registering the img to table!');
+                  }
+
+
                 // ファイルを保存する
                 if (!move_uploaded_file($fileTmpName, $uploadPath)) {
                     throw new Exception('something wrong with uploading the img file!');

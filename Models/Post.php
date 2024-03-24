@@ -51,7 +51,7 @@ class Post implements Model {
         $this->text = $text;
     }
 
-    public function getFileName(): string {
+    public function getFileName(): ?string {
         return $this->file_name;
     }
 
