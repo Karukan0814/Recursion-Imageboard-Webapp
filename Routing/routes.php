@@ -107,7 +107,7 @@ return [
             $fileTmpName = $file['tmp_name'];
 
             // ファイルの保存処理
-            $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . "/img/original"; // プロジェクトのルートディレクトリに対する相対パス
+            $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . "/public/img/original"; // プロジェクトのルートディレクトリに対する相対パス
 
             //  テーブルに登録された時間を取得
             $create_datetime = $createResult->getCreated_at();
@@ -144,7 +144,7 @@ return [
 
             // 入力ファイル名と出力ファイル名
             $inputFile = $uploadPath;
-            $outputFile = $_SERVER['DOCUMENT_ROOT'] . "/img/thumbnail" . "/" . $hashedFileName . '.' . $fileExtension;
+            $outputFile = $_SERVER['DOCUMENT_ROOT'] . "/public/img/thumbnail" . "/" . $hashedFileName . '.' . $fileExtension;
 
 
             // ファイルの拡張子がGIFの場合、最初のフレームだけを取り出す
@@ -263,7 +263,7 @@ return [
                     $fileTmpName = $file['tmp_name'];
 
                     // ファイルの保存処理
-                    $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . "/img/original"; // プロジェクトのルートディレクトリに対する相対パス
+                    $uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . "/public/img/original"; // プロジェクトのルートディレクトリに対する相対パス
 
                     //  テーブルに登録された時間を取得
                     $create_datetime = $createResult->getCreated_at();
@@ -299,7 +299,7 @@ return [
 
                     // 入力ファイル名と出力ファイル名
                     $inputFile = $uploadPath;
-                    $outputFile = $_SERVER['DOCUMENT_ROOT'] . "/img/thumbnail" . "/" . $hashedFileName . '.' . $fileExtension;
+                    $outputFile = $_SERVER['DOCUMENT_ROOT'] . "/public/img/thumbnail" . "/" . $hashedFileName . '.' . $fileExtension;
 
                     // ファイルの拡張子がGIFの場合、最初のフレームだけを取り出す
                     if ($fileExtension === 'gif') {

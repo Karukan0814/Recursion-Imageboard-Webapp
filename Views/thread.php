@@ -31,8 +31,8 @@
                 </div>
                 <?php if (!empty($thread->getFileName())) : ?>
                     <div class="mt-3">
-                        <a href="<?= '/img/original/' . $thread->getFileName() ?>" class="text-decoration-none text-secondary">
-                            <img src="<?= '/img/thumbnail/' . $thread->getFileName() ?>" alt="Thumbnail" class="img-thumbnail">
+                        <a href="<?= 'public/img/original/' . $thread->getFileName() ?>" class="text-decoration-none text-secondary">
+                            <img src="<?= 'public/img/thumbnail/' . $thread->getFileName() ?>" alt="Thumbnail" class="img-thumbnail">
                         </a>
                     </div>
                 <?php endif; ?>
@@ -78,7 +78,7 @@
                         </a>
 
                         <?php if (!empty($reply->getFileName())) : ?>
-                            <img src="<?= '/img/thumbnail/' . $reply->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
+                            <img src="<?= 'public/img/thumbnail/' . $reply->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>

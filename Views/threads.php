@@ -66,7 +66,7 @@
                                 </div>
 
                                 <?php if (!empty($thread->getFileName())) : ?>
-                                    <img src="<?= '/img/thumbnail/' . $thread->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
+                                    <img src="<?= 'public/img/thumbnail/' . $thread->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
                                 <?php else : ?>
                                     <div>No img</div>
                                 <?php endif; ?>
@@ -83,7 +83,7 @@
                                             <small><?= htmlspecialchars($reply->getCreated_at()) ?></small>
                                         </div>
                                         <?php if (!empty($reply->getFileName())) : ?>
-                                            <img src="<?= '/img/thumbnail/' . $reply->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
+                                            <img src="<?= 'public/img/thumbnail/' . $reply->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
                                         <?php endif; ?>
                                     </li>
                                 <?php endforeach; ?>
