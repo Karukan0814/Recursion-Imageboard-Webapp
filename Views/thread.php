@@ -15,7 +15,7 @@
             <div class="d-flex justify-content-between">
                 <div class="d-flex flex-column justify-content-between">
                     <div>
-                        <div class="mb-3 w-50">
+                        <div class="mb-3 w-100">
                             <h5 class="fw-bold"><?= htmlspecialchars($thread->getSubject()) ?></h5>
                         </div>
 
@@ -43,7 +43,7 @@
 
         <form id="upload-form" action="child_register" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-left">
 
-        <input type="hidden" name="reply_id" value="<?= htmlspecialchars($thread->getPost_id()) ?>">
+            <input type="hidden" name="reply_id" value="<?= htmlspecialchars($thread->getPost_id()) ?>">
 
             <div class="mb-3 w-100">
                 <label for="text" class="form-label">Reply:</label>
@@ -110,7 +110,7 @@
 
         // ファイルがアップロードされているか確認
         if (file) {
-            
+
             // ファイルの形式を確認
             const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
             if (!validImageTypes.includes(file.type)) {
