@@ -3,6 +3,13 @@ set_include_path(get_include_path() . PATH_SEPARATOR . realpath(__DIR__ . '/..')
 spl_autoload_extensions(".php");
 spl_autoload_register();
 
+
+// セッションクッキーの有効期限を24時間に設定
+$lifetime = 86400; // 秒単位
+session_set_cookie_params($lifetime);
+session_start();
+
+
 $DEBUG = true;
 
 if (preg_match('/\.(?:png|jpg|jpeg|gif|js|css|html)$/', $_SERVER["REQUEST_URI"])) {

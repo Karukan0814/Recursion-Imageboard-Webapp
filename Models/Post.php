@@ -12,7 +12,7 @@ class Post implements Model {
     public function __construct(
         private string $post_id,
         private ?string $reply_to_id = null,
-        private string $subject,
+        private ?string $subject,
         private string $text,
         private ?string $file_name = null,
 
@@ -35,7 +35,7 @@ class Post implements Model {
     public function setReply_to_id(string $reply_to_id): void {
         $this->reply_to_id = $reply_to_id;
     }
-    public function getSubject(): string {
+    public function getSubject(): ?string {
         return $this->subject;
     }
 
