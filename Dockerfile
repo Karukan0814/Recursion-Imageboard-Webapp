@@ -1,5 +1,5 @@
 # ベースイメージを指定
-FROM php:8.0-apache
+FROM php:8.1-apache
 
 # PHPの拡張機能をインストール
 # PHP の拡張機能をインストール
