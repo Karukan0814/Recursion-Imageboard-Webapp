@@ -13,7 +13,7 @@
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <form id="upload-form" action="" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-left">
+            <form id="upload-form" action="parent_register" method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-left">
 
                 <div class="mb-3 w-50">
                     <label for="subject" class="form-label">Subject:</label>
@@ -44,20 +44,40 @@
         </div>
 
         <?php if (empty($threads)) : ?>
-            <div class="alert alert-info">スレッドは登録されていません。</div>
+            <div class="alert alert-info">No thread has been registered yet.</div>
         <?php else : ?>
             <ul class="list-group">
                 <?php foreach ($threads as $thread) : ?>
-                 
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <a href="/post?id=<?= htmlspecialchars($thread->getPost_id()) ?>" class="text-decoration-none text-secondary">
-                            <h5><?= htmlspecialchars($thread->getSubject()) ?></h5>
-                            <p> <?= htmlspecialchars($thread->getText()) ?></p>
-                            <small> <?= htmlspecialchars($thread->getCreated_at()) ?></small>
-                        </a>
 
-                        <?php if (!empty($thread->getFileName())) : ?>
-                            <img src="<?= '/img/thumbnail/' .$thread->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail" >
+                    <li class="list-group-item d-flex flex-column align-items-left ">
+                        <a href="/thread?id=<?= htmlspecialchars($thread->getPost_id()) ?>" class="text-decoration-none text-secondary">
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <div>
+
+                                    <h5><?= htmlspecialchars($thread->getSubject()) ?></h5>
+                                    <p> <?= htmlspecialchars($thread->getText()) ?></p>
+                                    <small> <?= htmlspecialchars($thread->getCreated_at()) ?></small>
+                                </div>
+
+                                <?php if (!empty($thread->getFileName())) : ?>
+                                    <img src="<?= '/img/thumbnail/' . $thread->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
+                                <?php endif; ?>
+                            </div>
+                        </a>
+                        <?php if (!empty($replies[$thread->getPost_id()])) : ?>
+                            <h3 style="color: #4a90e2; font-size: 18px; font-weight: bold;">Replies</h3>
+                            <ul class="list-group mt-2">
+                                <?php foreach ($replies[$thread->getPost_id()] as $reply) : ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <p><?= htmlspecialchars($reply->getText()) ?></p>
+                                        <small><?= htmlspecialchars($reply->getCreated_at()) ?></small>
+                                        <?php if (!empty($reply->getFileName())) : ?>
+                                            <img src="<?= '/img/thumbnail/' . $reply->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
+                                        <?php endif; ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
