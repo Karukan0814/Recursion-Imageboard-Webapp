@@ -49,19 +49,26 @@
             <ul class="list-group">
                 <?php foreach ($threads as $thread) : ?>
 
-                    <li class="list-group-item d-flex flex-column align-items-left ">
+                    <li class="list-group-item d-flex flex-column align-items-left mt-2">
                         <a href="/thread?id=<?= htmlspecialchars($thread->getPost_id()) ?>" class="text-decoration-none text-secondary">
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-left ">
 
                                 <div>
-
-                                    <h5><?= htmlspecialchars($thread->getSubject()) ?></h5>
-                                    <p> <?= htmlspecialchars($thread->getText()) ?></p>
-                                    <small> <?= htmlspecialchars($thread->getCreated_at()) ?></small>
+                                    <div class="mb-2">
+                                        <h3 style="color: #4a90e2; font-size: 22px; font-weight: bold;">
+                                            <?= htmlspecialchars($thread->getSubject()) ?>
+                                            <span class="text-secondary px-2" style="font-size: 14px;">
+                                                <?= htmlspecialchars($thread->getCreated_at()) ?>
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <p class="px-3"><?= htmlspecialchars($thread->getText()) ?></p>
                                 </div>
 
                                 <?php if (!empty($thread->getFileName())) : ?>
                                     <img src="<?= '/img/thumbnail/' . $thread->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
+                                <?php else : ?>
+                                    <div>No img</div>
                                 <?php endif; ?>
                             </div>
                         </a>
@@ -69,9 +76,12 @@
                             <h3 style="color: #4a90e2; font-size: 18px; font-weight: bold;">Replies</h3>
                             <ul class="list-group mt-2">
                                 <?php foreach ($replies[$thread->getPost_id()] as $reply) : ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <p><?= htmlspecialchars($reply->getText()) ?></p>
-                                        <small><?= htmlspecialchars($reply->getCreated_at()) ?></small>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center text-decoration-none text-secondary">
+                                        <div class=" d-flex flex-column ">
+
+                                            <p><?= htmlspecialchars($reply->getText()) ?></p>
+                                            <small><?= htmlspecialchars($reply->getCreated_at()) ?></small>
+                                        </div>
                                         <?php if (!empty($reply->getFileName())) : ?>
                                             <img src="<?= '/img/thumbnail/' . $reply->getFileName()  ?>" alt="Thumbnail" class="img-thumbnail">
                                         <?php endif; ?>
