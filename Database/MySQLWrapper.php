@@ -8,14 +8,14 @@ use Helpers\Settings;
 
 class MySQLWrapper extends mysqli
 {
-    public function __construct(?string $hostname = 'localhost', ?string $username = null, ?string $password = null, ?string $database = null, ?int $port = null, ?string $socket = null)
+    public function __construct(?string $hostname = null, ?string $username = null, ?string $password = null, ?string $database = null, ?int $port = null, ?string $socket = null)
     {
         /*
             接続の失敗時にエラーを報告し、例外をスローします。データベース接続を初期化する前にこの設定を行ってください。
             テストするには、.env設定で誤った情報を入力します。
         */
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
+        $hostname = $hostname ?? Settings::env('DATABASE_HOST');
         $username = $username ?? Settings::env('DATABASE_USER');
         $password = $password ?? Settings::env('DATABASE_USER_PASSWORD');
         $database = $database ?? Settings::env('DATABASE_NAME');
