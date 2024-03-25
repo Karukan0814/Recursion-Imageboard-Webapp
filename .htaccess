@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# リクエストされたファイルまたはディレクトリが実際に存在しない場合にのみ、リライトを適用
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# すべてのリクエストを index.php にリダイレクト
+RewriteRule ^ index.php [L]
