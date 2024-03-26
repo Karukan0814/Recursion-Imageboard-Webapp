@@ -8,8 +8,27 @@
 ユーザーは、画像と共にコンテンツを投稿することで新しいスレッドを作成できる。メインスレッドが作成されると、他のユーザーはテキストや画像を使ってそれに返信。
 
 
-# 使用方法
+# 機能
 
+1. ホーム画面
+   Home画面から登録されたスレッドの一覧とリプライの最新5件を閲覧できる。
+
+   ![service-image](https://github.com/Karukan0814/Recursion-Imageboard-Webapp/blob/main/assets/threadsList.png)
+
+   また、画像をアップロードすることで新たなスレッドを登録することができる。
+   ![service-image](https://github.com/Karukan0814/Recursion-Imageboard-Webapp/blob/main/assets/registerThread.gif)
+   
+
+3. スレッド詳細画面
+   ホーム画面に表示されたスレッドを押下すると、そのスレッドの詳細画面に遷移する。
+   そのスレッドに紐づくすべてのリプライと、新たなリプライの登録が可能
+
+   ![service-image](https://github.com/Karukan0814/Recursion-Imageboard-Webapp/blob/main/assets/registerReply.gif)
+
+4. サムネイル画像
+   画像のアップロード時に自動的にImagickによってサムネイル画像が生成される。サムネイル画像をクリックするとオリジナルの画像が表示される。
+   ![service-image](https://github.com/Karukan0814/Recursion-Imageboard-Webapp/blob/main/assets/clickThumnail.gif)
+   
 
 
 
